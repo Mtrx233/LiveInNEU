@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:b="clr-namespace:Behaviors;assembly=Behaviors"
+             xmlns:lc="clr-namespace:LiveInNEU.Converters;assembly=LiveInNEU"
+             BindingContext="{Binding QuestionPageViewModel, Source={StaticResource ViewModelLocator}}"
+             x:Class="LiveInNEU.Views.QuestionPage"
+             NavigationPage.HasNavigationBar="False">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <lc:BytesToImageSourceConverter
+                x:Key="BytesToImageSourceConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Behaviors>
+        <b:EventHandlerBehavior EventName="Appearing">
+            <b:ActionCollection>
+                <b:InvokeCommandAction
+                    Command="{Binding PageAppearingCommand}" />
+            </b:ActionCollection>
+        </b:EventHandlerBehavior>
+    </ContentPage.Behaviors>
+    <!-- <Shell.BackButtonBehavior> -->
+    <!--     <BackButtonBehavior -->
+    <!--         Command="{Binding BackCommand}" -->
+    <!--         BindingContext="{Binding QuestionDirectoryPageViewModel, Source={StaticResource ViewModelLocator}}"/> -->
+    <!-- </Shell.BackButtonBehavior> -->
+    <ContentPage.Content>
+        <ScrollView>
+            <Grid VerticalOptions="FillAndExpand"
+                  HorizontalOptions="FillAndExpand"
+                  HeightRequest="760">
+                <Image Source="fin_back.jpg"
+                       Aspect="AspectFill" />
+                <Grid RowDefinitions="100,Auto,1*"
+                      ColumnDefinitions="1*,30*,1*">
+                    <Frame Grid.Row="1"
+                           Grid.Column="1"
+                           Margin="0,0,0,110"
+                           Padding="0,0,0,35"
+                           IsClippedToBounds="True"
+                           BackgroundColor="White"
+                           HasShadow="True"
+                           CornerRadius="5"
+                           Opacity="0.9">
+                        <Grid VerticalOptions="FillAndExpand"
+                              HorizontalOptions="FillAndExpand"
+                              RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto">
+                            <Grid Grid.Row="0"
+                                  BackgroundColor="#0099CC"
+                                  ColumnDefinitions="1*,1*,2*,1*,1*">
+                                <ImageButton Grid.Column="4"
+                                             Source="star.png"
+                                             HorizontalOptions="Center"
+                                             VerticalOptions="Center"
+                                             WidthRequest="36"
+                                             HeightRequest="36"
+                                             CornerRadius="18"
+                                             BorderWidth="1"
+                                             Aspect="AspectFit"
+                                             BorderColor="White"
+                                             BackgroundColor="{Binding IsCollected}"
+                                             Command="{Binding CollectCommand}" />
+                                <ImageButton Grid.Column="0"
+                                             Source="memo_white.png"
+                                             HorizontalOptions="Center"
+                                             VerticalOptions="Center"
+                                             WidthRequest="36"
+                                             HeightRequest="36"
+                                             CornerRadius="18"
+                                             BorderWidth="1"
+                                             Aspect="AspectFit"
+                                             BorderColor="White"
+                                             Clicked="OnImageButtonClicked" />
+                                <Label Text="{Binding SubjectNow}"
+                                       Grid.Column="2"
+                                       HeightRequest="40"
+                                       HorizontalOptions="Center"
+                                       VerticalOptions="Center"
+                                       TextColor="White"
+                                       FontSize="30" />
+                            </Grid>
+                            <Image Grid.Row="1"
+                                   Source="{Binding QuestionImg,
+                               Converter={StaticResource BytesToImageSourceConverter}}"
+                                   HeightRequest="100" />
+                            <ImageButton Grid.Row="2"
+                                         Command="{Binding AnswerACommand}"
+                                         Source="{Binding OptionA,
+                                     Converter={StaticResource BytesToImageSourceConverter}}"
+                                         BackgroundColor="{Binding ColorA}" />
+                            <ImageButton Grid.Row="3"
+                                         Command="{Binding AnswerBCommand}"
+                                         Source="{Binding OptionB,
+                                     Converter={StaticResource BytesToImageSourceConverter}}"
+                                         BackgroundColor="{Binding ColorB}" />
+                            <ImageButton Grid.Row="4"
+                                         Command="{Binding AnswerCCommand}"
+                                         Source="{Binding OptionC,
+                                     Converter={StaticResource BytesToImageSourceConverter}}"
+                                         BackgroundColor="{Binding ColorC}" />
+                            <ImageButton Grid.Row="5"
+                                         Command="{Binding AnswerDCommand}"
+                                         Source="{Binding OptionD,
+                                     Converter={StaticResource BytesToImageSourceConverter}}"
+                                         BackgroundColor="{Binding ColorD}" />
+                            <Image Grid.Row="6"
+                                   Source="{Binding Analysis,
+                               Converter={StaticResource BytesToImageSourceConverter}}"
+                                   IsVisible="{Binding VisibleProper}"
+                                   HeightRequest="150" />
+                            <Label x:Name="info" Text="{Binding Now,Mode=TwoWay}" IsVisible="False"
+                                   IsInNativeLayout="False" />
+                            <Grid ColumnDefinitions="1*,2*,2*,1*"
+                                  Grid.Row="7">
+                                <Button Text="上一题"
+                                        Grid.Column="1"
+                                        Command="{Binding PreCommand}" />
+                                <Button Text="下一题"
+                                        Grid.Column="2"
+                                        Command="{Binding NextCommand}" />
+                            </Grid>
+                        </Grid>
+                    </Frame>
+                </Grid>
+            </Grid>
+        </ScrollView>
+    </ContentPage.Content>
+
+</ContentPage>

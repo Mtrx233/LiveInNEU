@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- <author 赵全/> -->
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:b="clr-namespace:Behaviors;assembly=Behaviors"
+             xmlns:dxsch="http://schemas.devexpress.com/xamarin/2014/forms/scheduler"
+             BindingContext="{Binding LessonPageViewModel,Source={StaticResource ViewModelLocator}}"
+             x:Class="LiveInNEU.Views.LessonPage">
+    <ContentPage.Behaviors>
+        <b:EventHandlerBehavior EventName="Appearing">
+            <b:ActionCollection>
+                <b:InvokeCommandAction
+                    Command="{Binding PageAppearingCommand}" />
+            </b:ActionCollection>
+        </b:EventHandlerBehavior>
+    </ContentPage.Behaviors>
+    <ScrollView>
+        <StackLayout>
+            <ActivityIndicator Color="Accent"
+                               IsRunning="True"
+                               IsVisible="{Binding IsLoading,Mode=TwoWay}" />
+            <dxsch:WorkWeekView Start="{Binding BaseTime}"
+                                FirstDayOfWeek="Sunday"
+                                WorkDays="EveryDay"
+                                WorkTime="8:00:00-22:00:00"
+                                ShowWorkTimeOnly="True"
+                                TimeScaleInterval="01:00:00"
+                                TimeScaleSlotCount="2"
+                                SnapToCellsMode="Always"
+                                Tap="WorkWeekView_Tap">
+                <dxsch:WorkWeekView.DataStorage>
+                    <dxsch:SchedulerDataStorage x:Name="storage">
+                        <dxsch:SchedulerDataStorage.DataSource>
+                            <dxsch:DataSource AppointmentsSource="{Binding LessonsCollection}"
+                                              AppointmentLabelsSource="{Binding Labels}">
+                                <dxsch:DataSource.AppointmentMappings>
+                                    <dxsch:AppointmentMappings
+                                        Subject="detail"
+                                        Start="StartTime"
+                                        End="EndTime"
+                                        LabelId="colour" />
+                                </dxsch:DataSource.AppointmentMappings>
+                                <dxsch:DataSource.AppointmentLabelMappings>
+                                    <dxsch:AppointmentLabelMappings
+                                        Color="Color"
+                                        Id="Id" />
+                                </dxsch:DataSource.AppointmentLabelMappings>
+                            </dxsch:DataSource>
+                        </dxsch:SchedulerDataStorage.DataSource>
+                    </dxsch:SchedulerDataStorage>
+                </dxsch:WorkWeekView.DataStorage>
+            </dxsch:WorkWeekView>
+        </StackLayout>
+    </ScrollView>
+
+</ContentPage>

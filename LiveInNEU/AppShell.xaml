@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Shell xmlns="http://xamarin.com/schemas/2014/forms"
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+       mc:Ignorable="d"
+       xmlns:local="clr-namespace:LiveInNEU.Views;assembly=LiveInNEU"
+       x:Class="LiveInNEU.AppShell">
+    <!-- <Shell.TitleView> -->
+    <!--      -->
+    <!-- </Shell.TitleView> -->
+    <!-- Styles and Resources -->
+    <Shell.Resources>
+        <ResourceDictionary>
+            <Color x:Key="NavigationPrimary">#0099CC</Color>
+            <Style x:Key="BaseStyle"
+                   TargetType="Element">
+                <Setter Property="Shell.ForegroundColor"
+                        Value="{StaticResource NavigationPrimary}" />
+                <Setter Property="Shell.TitleColor"
+                        Value="Black" />
+                <Setter Property="Shell.UnselectedColor"
+                        Value="#95FFFFFF" />
+                <Setter Property="Shell.TabBarBackgroundColor"
+                        Value="{StaticResource NavigationPrimary}" />
+                <Setter Property="Shell.TabBarUnselectedColor"
+                        Value="#95FFFFFF" />
+                <Setter Property="Shell.TabBarTitleColor"
+                        Value="White" />
+                <!-- <Setter Property="Shell.NavBarIsVisible" -->
+                <!--         Value="False"/> -->
+            </Style>
+            <Style TargetType="ShellItem"
+                   BasedOn="{StaticResource BaseStyle}" />
+            <Style TargetType="TabBar"
+                   BasedOn="{StaticResource BaseStyle}" />
+        </ResourceDictionary>
+    </Shell.Resources>
+
+    <ShellItem Route="loading" Shell.NavBarIsVisible="False">
+        <ShellContent ContentTemplate="{DataTemplate local:LoadingPage}" />
+    </ShellItem>
+
+    <ShellItem Route="login" Shell.NavBarIsVisible="False">
+        <ShellContent ContentTemplate="{DataTemplate local:LoginPage}" />
+    </ShellItem>
+
+    <TabBar Route="main">
+        <Tab Icon="home.png" Title="Home">
+            <ShellContent ContentTemplate="{DataTemplate local:MainPage}" />
+        </Tab>
+        <Tab Icon="pages.png" Title="Pages">
+            <ShellContent ContentTemplate="{DataTemplate local:MenuPage}" />
+        </Tab>
+        <Tab Icon="self.png" Title="Self">
+            <ShellContent ContentTemplate="{DataTemplate local:SelfPage}" />
+        </Tab>
+    </TabBar>
+
+</Shell>

@@ -1,0 +1,161 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage
+    x:Class="LiveInNEU.Views.MainPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:b="clr-namespace:Behaviors;assembly=Behaviors"
+    xmlns:control="clr-namespace:LiveInNEU.Controls"
+    BindingContext="{Binding MainPageViewModel,Source={StaticResource ViewModelLocator}}"
+    NavigationPage.HasNavigationBar="False">
+    <ContentPage.Behaviors>
+        <b:EventHandlerBehavior EventName="Appearing">
+            <b:ActionCollection>
+                <b:InvokeCommandAction
+                    Command="{Binding PageAppearingCommand}" />
+            </b:ActionCollection>
+        </b:EventHandlerBehavior>
+    </ContentPage.Behaviors>
+    <!-- <ContentPage.Resources> -->
+    <!--     <ResourceDictionary> -->
+    <!--         <Style x:Key="TitleTextStyle" TargetType="Label"> -->
+    <!--             <Setter Property="TextColor" Value="{StaticResource TextColor}" /> -->
+    <!--             <Setter Property="FontSize" Value="Medium" /> -->
+    <!--             <Setter Property="HorizontalOptions" Value="Center" /> -->
+    <!--         </Style> -->
+    <!--     </ResourceDictionary> -->
+    <!-- </ContentPage.Resources> -->
+    <!-- <Shell.TitleView> -->
+    <!--     <Grid HorizontalOptions="FillAndExpand" -->
+    <!--           VerticalOptions="FillAndExpand" -->
+    <!--           BackgroundColor="#0099CC"> -->
+    <!--         <Label -->
+    <!--             Text="LiveInNEU" -->
+    <!--             Style="{StaticResource TitleTextStyle}" /> -->
+    <!--     </Grid> -->
+    <!-- </Shell.TitleView> -->
+    <StackLayout>
+        <ScrollView>
+            <StackLayout>
+                <Grid
+                RowDefinitions="Auto,Auto,800">
+                <ActivityIndicator
+                    Grid.Row="0"
+                    Color="Accent"
+                    IsRunning="True"
+                    IsVisible="{Binding IsLoading,Mode=TwoWay}" />
+                <Grid
+                    Grid.Row="1"
+                    HorizontalOptions="FillAndExpand"
+                    RowDefinitions="auto, auto"
+                    RowSpacing="0"
+                    VerticalOptions="FillAndExpand">
+                    <Image Source="fin_back.jpg"
+                           Aspect="AspectFill"
+                           Opacity="0.8" />
+                    <ScrollView Grid.Row="0">
+                        <Grid
+                            ColumnDefinitions="*, auto, auto"
+                            ColumnSpacing="0"
+                            HorizontalOptions="FillAndExpand"
+                            RowDefinitions="auto, auto, auto, auto, auto"
+                            VerticalOptions="FillAndExpand">
+                            <StackLayout
+                                Grid.Row="0"
+                                Margin="15,30,20,0"
+                                HorizontalOptions="FillAndExpand"
+                                Orientation="Horizontal">
+                                <Label>
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span
+                                                FontSize="20"
+                                                Text="LiveIn" />
+                                            <Span
+                                                FontSize="20"
+                                                Text="NEU"
+                                                TextColor="#FFA700" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                            </StackLayout>
+                            <!-- <Image -->
+                            <!--     Grid.Row="0" -->
+                            <!--     Grid.Column="1" -->
+                            <!--     Margin="0,30,20,0" -->
+                            <!--     Aspect="AspectFit" -->
+                            <!--     HeightRequest="20" -->
+                            <!--     Source="notification" -->
+                            <!--     WidthRequest="20" /> -->
+                            <Image
+                                Grid.Row="0"
+                                Grid.Column="2"
+                                Margin="0,30,20,0"
+                                Aspect="AspectFit"
+                                HeightRequest="20"
+                                Source="menu"
+                                WidthRequest="20" />
+
+                            <Grid
+                                Grid.Row="1"
+                                Grid.ColumnSpan="3"
+                                Margin="20,20,20,0"
+                                ColumnDefinitions="*, auto"
+                                RowDefinitions="auto, auto">
+                                <Label
+                                    Grid.Row="0"
+                                    FontFamily="MuliBlack"
+                                    FontSize="20"
+                                    Text="嗨, 你好！" />
+                                <Label
+                                    Grid.Row="1"
+                                    FontFamily="MuliBold"
+                                    FontSize="14"
+                                    Text="海内存知己，天涯若比邻。" />
+                                <BoxView
+                                    Grid.RowSpan="2"
+                                    Grid.Column="1"
+                                    BackgroundColor="WhiteSmoke"
+                                    Opacity="0.5"
+                                    CornerRadius="27"
+                                    HeightRequest="54"
+                                    HorizontalOptions="Center"
+                                    VerticalOptions="Center"
+                                    WidthRequest="54" />
+                                <Image
+                                    Grid.RowSpan="2"
+                                    Grid.Column="1"
+                                    Aspect="AspectFit"
+                                    HeightRequest="50"
+                                    HorizontalOptions="Center"
+                                    Source="a00"
+                                    VerticalOptions="Center" />
+                            </Grid>
+
+
+                            <!-- 界面显示 -->
+
+
+                            <control:ListEventTypesView
+                                Grid.Row="3"
+                                Grid.ColumnSpan="3"
+                                Margin="10,10,10,15"
+                                VerticalOptions="Start" />
+
+                            <control:ListEventsView
+                                Grid.Row="4"
+                                HeightRequest="400"
+                                Grid.ColumnSpan="3"
+                                Margin="10,10,10,10"
+                                VerticalOptions="Start" />
+
+                        </Grid>
+                    </ScrollView>
+                </Grid>
+            </Grid>
+            </StackLayout>
+        </ScrollView>
+
+    </StackLayout>
+
+</ContentPage>

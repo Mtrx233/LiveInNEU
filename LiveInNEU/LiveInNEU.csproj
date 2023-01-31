@@ -1,0 +1,41 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Compile Remove="Models\LessonData.cs" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Behaviors.Forms" Version="1.4.0" />
+        <PackageReference Include="DevExpress.XamarinForms.Scheduler" Version="21.2.3" />
+        <PackageReference Include="DLToolkit.Forms.Controls.FlowListView" Version="2.0.11" />
+        <PackageReference Include="FirebaseDatabase.net" Version="4.0.7" />
+        <PackageReference Include="FluentValidation" Version="10.3.4" />
+        <PackageReference Include="Microsoft.Graph" Version="4.13.0" />
+        <PackageReference Include="Microsoft.Identity.Client" Version="4.39.0" />
+        <PackageReference Include="Moq" Version="4.16.1" />
+        <PackageReference Include="MvvmLightLibs" Version="5.4.1.1" />
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+        <PackageReference Include="Plugin.LocalNotification" Version="9.1.1" />
+        <PackageReference Include="Rg.Plugins.Popup" Version="2.0.0.14" />
+        <PackageReference Include="SharpZipLib" Version="1.3.3" />
+        <PackageReference Include="sqlite-net-pcl" Version="1.8.116" />
+        <PackageReference Include="Syncfusion.Xamarin.Expander" Version="19.3.0.57" />
+        <PackageReference Include="Xamarin.CommunityToolkit" Version="1.3.1" />
+        <PackageReference Include="Xamarin.Forms" Version="5.0.0.2244" />
+        <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
+        <PackageReference Include="Xamarin.Forms.Extended.InfiniteScrolling" Version="1.0.0-preview2" />
+        <PackageReference Include="Xamarin.Forms.PancakeView" Version="2.3.0.759" />
+        <PackageReference Include="Xamarin.Forms.PinchZoomImage" Version="1.2.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <EmbeddedResource Include="neudb.sqlite3">
+            <LogicalName>neudb.sqlite3</LogicalName>
+        </EmbeddedResource>
+    </ItemGroup>
+</Project>

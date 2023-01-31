@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<!-- <author 殷昭伉/> -->
+<pages:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                 xmlns:b="clr-namespace:Behaviors;assembly=Behaviors"
+                 xmlns:pages="http://rotorgames.com"
+                 BindingContext="{Binding ScheduleViewModel,Source={StaticResource ViewModelLocator}}"
+                 x:Class="LiveInNEU.Views.NoteAddPage">
+    <pages:PopupPage.Resources>
+        <ResourceDictionary>
+            <Color x:Key="Primary">#2196F3</Color>
+        </ResourceDictionary>
+    </pages:PopupPage.Resources>
+    
+    <ContentPage.Behaviors>
+        <b:EventHandlerBehavior EventName="Appearing">
+            <b:ActionCollection>
+                <b:InvokeCommandAction
+                    Command="{Binding PageAppearingCommand}" />
+            </b:ActionCollection>
+        </b:EventHandlerBehavior>
+    </ContentPage.Behaviors>
+
+    <pages:PopupPage.Animation>
+        <pages:ScaleAnimation DurationIn="600"
+                              DurationOut="300"
+                              EasingIn="SinOut"
+                              EasingOut="SinIn"
+                              HasBackgroundAnimation="True"
+                              PositionIn="Center"
+                              PositionOut="Center"
+                              ScaleIn="1.2"
+                              ScaleOut="0.8" />
+    </pages:PopupPage.Animation>
+
+    <Grid VerticalOptions="Center" Margin="40,20" HeightRequest="500">
+        <Frame CornerRadius="20" BackgroundColor="White">
+            <StackLayout Spacing="20" Padding="1">
+                <!-- <Image Source="person.png" HeightRequest="50" VerticalOptions="End"/> -->
+                <Entry x:Name="title" Text="{Binding title}" Placeholder="标题"
+                       PlaceholderColor="#bababa" FontSize="16" />
+                <Entry x:Name="page" 
+                       Text="{Binding page}" 
+                       Placeholder="内容"
+                       HeightRequest="100"
+                       PlaceholderColor="#bababa" 
+                       FontSize="16" />
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40" />
+                        <RowDefinition Height="40" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <DatePicker Grid.Row="0" Grid.Column="0"
+                                Format="yyyy/MM/dd"
+                                Date="{Binding DDL,Mode=TwoWay}" />
+                    <TimePicker
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        Format="HH:mm"
+                        Time="{Binding Time,Mode=TwoWay}" />
+                    <Picker
+                        x:Name="ClassChoose"
+                        Grid.Row="1"
+                        Grid.ColumnSpan="2"
+                        Title="绑定课程"
+                        TitleColor="#bababa"
+                        FontSize="16"
+                        Picker.ItemsSource="{Binding lessonList}"
+                        SelectedItem="{Binding lesson, Mode=TwoWay}" />
+                </Grid>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition />
+
+                    </Grid.ColumnDefinitions>
+                    <Label x:Name="infos" IsVisible="False" Text="{Binding Lessonstr,Mode=TwoWay}" TextColor="Red"
+                           HorizontalOptions="Center" PropertyChanged="BindablesObject_OnPropertyChanged" />
+                </Grid>
+
+                <Grid x:Name="Have"
+                      ColumnDefinitions="1*,1*">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50" />
+                    </Grid.RowDefinitions>
+                    <Button Grid.Row="0" Grid.Column="0" Margin="0,0,0,0" Text="添加"
+                            BackgroundColor="{StaticResource Primary}"
+                            TextColor="White" HeightRequest="50" VerticalOptions="Start"
+                            Command="{Binding AddsItemCommand}" />
+                    <Button Grid.Row="0" Grid.Column="1" Margin="0,0,0,0" Text="取消" BackgroundColor="Red"
+                            TextColor="White" HeightRequest="50" VerticalOptions="Start"
+                            Command="{Binding DelCommand}" />
+                </Grid>
+                <Label x:Name="Nows" IsVisible="False" Text="{Binding Msg,Mode=TwoWay}" TextColor="Red" HorizontalOptions="Center"
+                       PropertyChanged="BindablesObject_OnPropertyChanged" />
+                <Label Text="添加备忘录~~" HorizontalOptions="Center" FontSize="12" />
+            </StackLayout>
+        </Frame>
+    </Grid>
+
+
+</pages:PopupPage>

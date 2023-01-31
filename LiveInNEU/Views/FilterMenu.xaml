@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:liveInNeu="clr-namespace:LiveInNEU;assembly=LiveInNEU"
+             BindingContext="{Binding ScheduleViewModel,Source={StaticResource ViewModelLocator}}"
+             x:Class="LiveInNEU.Views.FilterMenu">
+    <ContentView.Content>
+        <Grid>
+            <Image 
+                x:Name="OuterCircle" 
+                WidthRequest="60"
+                HeightRequest="60" 
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
+                Source="outer_circle"
+                />
+            <Image 
+                x:Name="InnerButtonMenu" 
+                Opacity="1" 
+                WidthRequest="60" 
+                HeightRequest="60"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
+                Source="menu_circle"/>
+            <Image 
+                x:Name="InnerButtonClose" 
+                Opacity="0" 
+                WidthRequest="60"
+                HeightRequest="60"
+                VerticalOptions="Center"
+                HorizontalOptions="Center" 
+                Source="close_circle"/>
+            <!-- N -->
+            <ImageButton
+                BackgroundColor="#FF3163"
+                x:Name="N" 
+                Opacity="0"
+                Margin="0,-60,0,60"
+                Source="add" 
+                Aspect="AspectFit"
+                WidthRequest="40" 
+                HeightRequest="40" 
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
+                Clicked = "OnImageButtonClicked"
+            />
+            <!-- SW -->
+            <ImageButton
+                BackgroundColor="#FF3163"
+                   x:Name="SW" 
+                   Opacity="0"
+                   Margin="0,60,130,0"
+                   Source="doing"
+                   Aspect="AspectFit"
+                   WidthRequest="40"
+                   HeightRequest="40" 
+                   VerticalOptions="Center"
+                   HorizontalOptions="Center"
+                   Command="{Binding DoingItemCommand}"/>
+            <!-- SW -->
+            <ImageButton 
+                BackgroundColor="#FF3163"
+                x:Name="SWs" 
+                Opacity="0"
+                Margin="0,60,-130,0"
+                Source="done"
+                Aspect="AspectFit"
+                WidthRequest="40"
+                HeightRequest="40" 
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
+                Command="{Binding DoneItemCommand}"/>
+        </Grid>
+    </ContentView.Content>
+</ContentView>

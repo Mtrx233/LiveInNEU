@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- <author 钱子昂/> -->
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:b="clr-namespace:Behaviors;assembly=Behaviors"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             BindingContext="{Binding LoadingPageViewModel,Source={StaticResource ViewModelLocator}}"
+             mc:Ignorable="d"
+             Shell.NavBarIsVisible="False"
+             x:Class="LiveInNEU.Views.LoadingPage">
+    
+    <ContentPage.Behaviors>
+        <b:EventHandlerBehavior EventName="Appearing">
+            <b:ActionCollection>
+                <b:InvokeCommandAction
+                    Command="{Binding PageAppearingCommand}"/>
+            </b:ActionCollection>
+        </b:EventHandlerBehavior>
+    </ContentPage.Behaviors>
+    
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
+            <ActivityIndicator Color="Accent"
+                               IsRunning="True"
+                               IsVisible="True" />
+            <Label Text="Loading ..." />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

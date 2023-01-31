@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:behaviors="clr-namespace:Behaviors;assembly=Behaviors"
+             xmlns:views="http://xamarin.com/schemas/2020/toolkit"
+             xmlns:lv="clr-namespace:LiveInNEU.ViewModels;assembly=LiveInNEU"
+             xmlns:views1="clr-namespace:LiveInNEU.Views;assembly=LiveInNEU"
+             BindingContext="{Binding ScheduleViewModel,Source={StaticResource ViewModelLocator}}"
+             x:Class="LiveInNEU.Views.SchedulePage"
+             Shell.TabBarBackgroundColor="#0099CC">
+    <ContentPage.Behaviors>
+        <behaviors:EventHandlerBehavior EventName="Appearing">
+            <behaviors:ActionCollection>
+                <behaviors:InvokeCommandAction
+                    Command="{Binding PageAppearingCommand}" />
+            </behaviors:ActionCollection>
+        </behaviors:EventHandlerBehavior>
+    </ContentPage.Behaviors>
+    <ContentPage.BackgroundColor>#f3f4f6</ContentPage.BackgroundColor>
+    <ContentPage.Content>
+
+        <Grid Padding="25,0,0,0"
+              RowDefinitions="Auto, Auto, Auto,*"
+              ColumnDefinitions="Auto, *, Auto">
+            <!--Corner image-->
+            <Image Grid.Row="0" Grid.Column="2" Source="Corner" HeightRequest="200"/>
+            <!--Schedule timeline-->
+            <Image Grid.Row="1"
+                   Grid.Column="0"
+                   Source="calendar.png"
+                   HeightRequest="50"
+                   Margin="0,-120,0,0"
+                   VerticalOptions="Start" />
+            <BoxView
+                Grid.Row="2"
+                Grid.Column="0"
+                VerticalOptions="Start"
+                WidthRequest="5"
+                Color="#bfc0c0"
+                HeightRequest="120"
+                Margin="25,-135,25,0" />
+            <!-- Date description-->
+            <Label
+                Grid.Row="1"
+                Grid.Column="1"
+                Grid.ColumnSpan="2"
+                Text="{Binding Date}"
+                Margin="0,-120,0,0"
+                TextColor="#535257"
+                FontAttributes="Bold"
+                FontSize="32"
+                Padding="10,0,0,0" />
+            <views1:FilterMenu
+                Grid.Row="1"
+                Grid.Column="1"
+                Grid.ColumnSpan="2"
+                Margin="150,-30,0,0"
+                HorizontalOptions="Center"
+                VerticalOptions="Center" />
+            <!-- Shedule list structure-->
+            <CollectionView ItemsSource="{Binding notes}"
+                            Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3"
+                            SelectedItem="{Binding _note}"
+                            VerticalScrollBarVisibility="Never"
+                            VerticalOptions="Start">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <SwipeView>
+
+                            <SwipeView.RightItems>
+                                <SwipeItems>
+                                    <SwipeItem
+
+                                        IconImageSource="delete.png"
+                                        BackgroundColor="#eb4766"
+                                        Command="{Binding DeleteItemCommand,
+                                                            Source={RelativeSource AncestorType={x:Type lv:ScheduleViewModel}}}"
+                                        CommandParameter="{Binding .}"
+                                        Text="Delete" />
+                                    <SwipeItem
+                                        IconImageSource="finish.png"
+                                        BackgroundColor="Gray"
+                                        Command="{Binding FinishItemCommand,
+                                                            Source={RelativeSource AncestorType={x:Type lv:ScheduleViewModel}}}"
+                                        CommandParameter="{Binding .}"
+                                        Text="Finish" />
+                                </SwipeItems>
+                            </SwipeView.RightItems>
+                            <Grid RowDefinitions="Auto, Auto" ColumnDefinitions="Auto, *">
+                                <!-- Schedule time-->
+                                <Label Grid.Row="0" Grid.Column="0" 
+                                       Text="{Binding SetupTime}" 
+                                       TextColor="#bfc0c0"
+                                       VerticalOptions="Start" 
+                                       FontSize="15"/>
+                                <!-- Vertical Line-->
+                                <BoxView Grid.Row="1" 
+                                         Grid.Column="0"
+                                         Color="#bfc0c0"
+                                         VerticalOptions="Start"
+                                         HeightRequest="120"
+                                         WidthRequest="1"
+                                         Margin="25,0,50,0" />
+                                <!-- Card -->
+                                <Frame Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" CornerRadius="25"
+                                       HasShadow="False" Margin="0,0,20,0">
+                                    <StackLayout>
+                                        <Label Text="{Binding Title}" FontAttributes="Bold" TextColor="#535257"
+                                               FontSize="18" />
+                                        <Label Text="{Binding Page}" TextColor="Silver" FontSize="18" />
+                                        <!-- Features-->
+                                        <CollectionView ItemsSource="{Binding features}"
+                                                        Margin="0,20,0,0"
+                                                        HorizontalScrollBarVisibility="Never"
+                                                        HeightRequest="50"
+                                                        ItemsLayout="HorizontalList">
+                                            <CollectionView.ItemTemplate>
+                                                <DataTemplate>
+                                                    <StackLayout Margin="0,0,10,0">
+                                                        <Button Text="{Binding title}"
+                                                                BackgroundColor="{Binding color}"
+                                                                FontAttributes="Bold"
+                                                                TextColor="{Binding colour}"
+                                                                Padding="10"
+                                                                HorizontalOptions="Start"
+                                                                Command="{Binding FeatureRouteCommand,
+                                                                        Source={RelativeSource AncestorType={x:Type lv:ScheduleViewModel}}}"
+                                                                CommandParameter="{Binding .}" />
+                                                    </StackLayout>
+                                                </DataTemplate>
+                                            </CollectionView.ItemTemplate>
+                                        </CollectionView>
+                                    </StackLayout>
+                                </Frame>
+
+                            </Grid>
+                        </SwipeView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

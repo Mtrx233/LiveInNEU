@@ -1,0 +1,88 @@
+﻿<?xml version="1.0"
+      encoding="UTF-8"?>
+
+<ContentView x:Class="LiveInNEU.Controls.ListEventTypesView"
+             xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             BindingContext="{Binding MainPageViewModel,Source={StaticResource ViewModelLocator}}"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit">
+
+
+    <ContentView.Content>
+
+
+        <Frame Padding="5,5,5,10"
+               Margin="0,0,0,0"
+               Opacity="0.8"
+               
+               CornerRadius="10">
+
+            <Grid HeightRequest="130"
+                  RowDefinitions="auto, auto"
+                  RowSpacing="20">
+                <Label Grid.Row="0"
+                       FontSize="16"
+                       xct:TouchEffect.AnimationDuration="100"
+                       xct:TouchEffect.PressedScale="0.75"
+                       xct:TouchEffect.PressedOpacity="0.6"
+                       xct:TouchEffect.Command="{Binding ChangeLessonShow}"
+                       Text="{Binding TodayLesson}" />
+                <CollectionView Grid.Row="1"
+                                BackgroundColor="Transparent"
+                                ItemsSource="{Binding LessonCollection}"
+                                SelectedItem="{Binding SelectedEventType}"
+                                SelectionChanged="OnCollectionViewSelectionChanged"
+                                SelectionChangedCommand="{Binding SelectEventTypeCommand}"
+                                SelectionChangedCommandParameter="{Binding SelectedEventType}"
+                                SelectionMode="None"
+                                VerticalOptions="Start">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout ItemSpacing="0"
+                                           Orientation="Horizontal" />
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid ColumnDefinitions="*, 15"
+                                  Margin="8,0,0,0">
+                                <Frame Grid.Column="0"
+                                       Padding="5,0,5,0"
+                                       BackgroundColor="{Binding Color}"
+                                       CornerRadius="10"
+                                       HasShadow="False"
+                                       HeightRequest="120"
+                                       IsClippedToBounds="True"
+                                       WidthRequest="{Binding Length}">
+
+                                    <StackLayout Spacing="0"
+                                                 VerticalOptions="Center">
+
+                                        <Label FontFamily="MuliBold"
+                                               FontSize="16"
+                                               FontAttributes="Bold"
+                                               HorizontalTextAlignment="Center"
+                                               Text="{Binding Name}"
+                                               TextColor="{Binding textColor}"
+                                               VerticalTextAlignment="Center" />
+                                        <Label FontFamily="MuliBold"
+                                               FontSize="12"
+                                               HorizontalTextAlignment="Center"
+                                               Text="{Binding Location}"
+                                               TextColor="#696969"
+                                               VerticalTextAlignment="Center" />
+                                        <Label FontFamily="MuliBold"
+                                               FontSize="10"
+                                               HorizontalTextAlignment="Center"
+                                               Text="{Binding BeginTime}"
+                                               TextColor="#696969"
+                                               VerticalTextAlignment="Center" />
+                                    </StackLayout>
+                                </Frame>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Grid>
+        </Frame>
+
+    </ContentView.Content>
+</ContentView>

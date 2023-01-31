@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:LiveInNEU.ViewModels;assembly=LiveInNEU"
+             x:Class="LiveInNEU.App">
+    <Application.Resources>
+        <ResourceDictionary>
+            <vm:ViewModelLocator x:Key="ViewModelLocator"/>
+            <Style x:Key="menu_label" TargetType="Label">
+                <Setter Property="FontSize" Value="17" />
+                <Setter Property="FontAttributes" Value="Bold" />
+            </Style>
+            <Color x:Key="AppBackgroundColor">#EDEDEE</Color>
+            
+            <Color x:Key="ColorA" >#088da5</Color>
+            <Color x:Key="ColorB" >#a5a58d</Color>
+            <Color x:Key="ColorC" >#181d27</Color>
+            <Color x:Key="ColorD" >#0d1b2a</Color>
+            <Style TargetType="NavigationPage" ApplyToDerivedTypes="True">
+                <Setter Property="BackgroundColor" Value="Transparent" />
+            </Style>
+            <LinearGradientBrush EndPoint="1,0" x:Key="GradientColorA">
+                <GradientStop Color="{DynamicResource ColorA}" Offset="0.1" />
+                <GradientStop Color="{DynamicResource ColorB}" Offset="1.0" />
+            </LinearGradientBrush>
+
+            <!-- <Color x:Key="BarBackgroundColor">#190D38</Color> -->
+            <Color x:Key="TextColor">Black</Color>
+            <!-- <Color x:Key="BackgroundColor">#241345</Color> -->
+            <Color x:Key="DetailTextColor">#9486B0</Color>
+            
+            
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

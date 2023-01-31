@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:lc="clr-namespace:LiveInNEU.Converters;assembly=LiveInNEU"
+             xmlns:pinch="clr-namespace:Xamarin.Forms.PinchZoomImage;assembly=Xamarin.Forms.PinchZoomImage"
+             BindingContext="{Binding LoadingPageViewModel,Source={StaticResource ViewModelLocator}}"
+             x:Class="LiveInNEU.Views.SchoolCalendarPage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <lc:BytesToImageSourceConverter x:Key="BytesToImageSourceConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <Frame
+            BackgroundColor="WhiteSmoke"
+            CornerRadius="30"
+            Margin="10,10,10,10">
+            <pinch:PinchZoom>
+                <pinch:PinchZoom.Content>
+                    <Grid
+                        VerticalOptions="FillAndExpand">
+                        <Image
+                            Aspect="Fill"
+                            Source="{Binding  ImageBytes,
+                                     Converter={StaticResource BytesToImageSourceConverter}}" />
+                    </Grid>
+                </pinch:PinchZoom.Content>
+            </pinch:PinchZoom>
+        </Frame>
+    </ContentPage.Content>
+</ContentPage>
